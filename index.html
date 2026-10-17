@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pizza Counter</title>
+<!-- FIX 1: the script was in <head> and ran before the buttons existed, so querySelector returned null. "defer" makes it run after the HTML is parsed -->
+<script src="app.js" defer></script>
+
+<style>
+
+:root {
+  --sauce: #b52f22;
+  --sauce-soft: rgba(181, 47, 34, 0.28);
+  --cheese: #f6cf5c;
+  --crust: #dfa04d;
+  --basil: #2f6b3a;
+  --ink: #2b1d16;
+  --paper: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  font-family: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--ink);
+  /* red-and-white tablecloth */
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--sauce-soft) 50%, transparent 50%),
+    linear-gradient(90deg, var(--sauce-soft) 50%, transparent 50%);
+  background-size: 56px 56px;
+}
+
+.card {
+  width: min(100%, 24rem);
+  padding: 2rem 1.5rem 1.75rem;
+  background: var(--paper);
+  border: 3px solid var(--sauce);
+  border-radius: 1.25rem;
+  box-shadow: 0 0.5rem 0 var(--sauce), 0 1.5rem 2rem rgba(43, 29, 22, 0.18);
+  text-align: center;
+}
+
+h1 {
+  margin: 0 0 1.25rem;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* the one bold element: the counter is a pizza */
+.counter {
+  margin: 0 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+#count {
+  display: grid;
+  place-items: center;
+  width: 11rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  font-size: 3.5rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 0.6rem 1rem rgba(43, 29, 22, 0.25);
+  background:
+    radial-gradient(circle 0.9rem at 24% 30%, #a3261b 98%, transparent 100%),
+    radial-gradient(circle 0.9rem at 77% 28%, #a3261b 98%, transparent 100%),
+    radial-gradient(circle 0.9rem at 26% 75%, #a3261b 98%, transparent 100%),
+    radial-gradient(circle 0.9rem at 75% 73%, #a3261b 98%, transparent 100%),
+    radial-gradient(circle closest-side, var(--cheese) 0 68%, var(--sauce) 68% 84%, var(--crust) 84% 100%);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+button {
+  font: inherit;
+  font-weight: 700;
+  padding: 0.7rem 1.1rem;
+  border: 2px solid var(--sauce);
+  border-radius: 0.75rem;
+  background: var(--paper);
+  color: var(--sauce);
+  cursor: pointer;
+  transition: transform 0.08s ease, background-color 0.15s ease;
+}
+
+button:hover {
+  background: #fbeceb;
+}
+
+button:active {
+  transform: translateY(2px);
+}
+
+button:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+#addBtn {
+  flex: 1 1 100%;
+  background: var(--sauce);
+  color: #fff;
+  font-size: 1.1rem;
+  padding: 0.85rem 1.1rem;
+}
+
+#addBtn:hover {
+  background: #9c261b;
+}
+
+#minusBtn {
+  flex: 1;
+}
+
+#resetBtn {
+  flex: 1;
+  border-color: transparent;
+  color: var(--ink);
+}
+
+#resetBtn:hover {
+  background: #f1ece8;
+}
+
+#message {
+  margin: 1.25rem auto 0;
+  width: fit-content;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  background: var(--basil);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* no empty green pill when there is no message */
+#message:empty {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button {
+    transition: none;
+  }
+}
+
+</style>
+
+
+
+
+
+
+</head>
+<body>
+<h1 id="title">Pizza Counter</h1>
+<p><h2>Pizzas: </h2><span id="count">0</span></p>
+<button id="addBtn">Add pizza</button>
+<button id="minusBtn">Remove pizza</button>
+<button id="resetBtn">Reset</button>
+<p id="message"></p>
+</body>
+</html>
